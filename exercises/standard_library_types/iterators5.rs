@@ -10,7 +10,9 @@
 //
 // Make the code compile and the tests pass.
 
-// I AM NOT DONE
+/*
+*fold 和 filter 实在是太优雅了！
+*/
 
 use std::collections::HashMap;
 
@@ -34,7 +36,8 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    let res:HashMap<_,_>=map.iter().filter(|x|x.1==&value).collect();
+    res.len()
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -53,7 +56,7 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    collection.iter().fold(0, |res,x| res+count_iterator(x, value))
 }
 
 #[cfg(test)]

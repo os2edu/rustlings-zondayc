@@ -3,7 +3,12 @@
 // can offer. Follow the steps to complete the exercise.
 // Execute `rustlings hint iterators2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+/*
+*闭包、concat函数，几个iter的区别 iter(),into_iter(),iter_mut()
+* into_iter()会夺走所有权
+* iter()是借用
+*iter_mut()是可变借用
+*/
 
 // Step 1.
 // Complete the `capitalize_first` function.
@@ -12,7 +17,9 @@ pub fn capitalize_first(input: &str) -> String {
     let mut c = input.chars();
     match c.next() {
         None => String::new(),
-        Some(first) => ???,
+        Some(first) => {
+            (first.to_ascii_uppercase().to_string()+&input[1..]).to_string()
+        },
     }
 }
 
@@ -21,7 +28,8 @@ pub fn capitalize_first(input: &str) -> String {
 // Return a vector of strings.
 // ["hello", "world"] -> ["Hello", "World"]
 pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
-    vec![]
+    let output:Vec<_>=words.iter().map(|x|capitalize_first(x)).collect();
+    output
 }
 
 // Step 3.
@@ -29,7 +37,8 @@ pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 // Return a single string.
 // ["hello", " ", "world"] -> "Hello World"
 pub fn capitalize_words_string(words: &[&str]) -> String {
-    String::new()
+    let big_words=capitalize_words_vector(words);
+    big_words.concat()
 }
 
 #[cfg(test)]
